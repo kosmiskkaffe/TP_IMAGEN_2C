@@ -1,0 +1,109 @@
+# depslib dependency file v1.0
+1726725753 source:c:\users\kevin\onedrive\escritorio\tp_topicos_2024_2c_sabados_imagen\bmpmanipuleitor\funciones_alvarez.c
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	"funciones_alvarez.h"
+	"estructuras.h"
+
+1726763397 source:c:\users\kevin\onedrive\escritorio\tp_topicos_2024_2c_sabados_imagen\bmpmanipuleitor\funciones_grupo.c
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+	"funciones_alvarez.h"
+
+1726629226 source:c:\users\kevin\onedrive\escritorio\tp_topicos_2024_2c_sabados_imagen\bmpmanipuleitor\main.c
+	<stdio.h>
+	"funciones_grupo.h"
+
+1726712484 c:\users\kevin\onedrive\escritorio\tp_topicos_2024_2c_sabados_imagen\bmpmanipuleitor\funciones_grupo.h
+	"funciones_rufino.h"
+	<string.h>
+	<stdio.h>
+	"funciones_alvarez.h"
+
+1726763341 c:\users\kevin\onedrive\escritorio\tp_topicos_2024_2c_sabados_imagen\bmpmanipuleitor\funciones_alvarez.h
+	"estructuras.h"
+
+1726725588 c:\users\kevin\onedrive\escritorio\tp_topicos_2024_2c_sabados_imagen\bmpmanipuleitor\estructuras.h
+
+1726814501 source:c:\users\kevin\onedrive\escritorio\github\imagen_tp_2c\funciones_alvarez.c
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	"funciones_alvarez.h"
+	"estructuras.h"
+	<stdbool.h>
+
+1726814307 c:\users\kevin\onedrive\escritorio\github\imagen_tp_2c\funciones_alvarez.h
+	"estructuras.h"
+	<stdbool.h>
+
+1726807644 c:\users\kevin\onedrive\escritorio\github\imagen_tp_2c\estructuras.h
+
+1726816242 source:c:\users\kevin\onedrive\escritorio\github\imagen_tp_2c\funciones_grupo.c
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+	"funciones_alvarez.h"
+
+1726629226 source:c:\users\kevin\onedrive\escritorio\github\imagen_tp_2c\main.c
+	<stdio.h>
+	"funciones_grupo.h"
+
+1726712484 c:\users\kevin\onedrive\escritorio\github\imagen_tp_2c\funciones_grupo.h
+	"funciones_rufino.h"
+	<string.h>
+	<stdio.h>
+	"funciones_alvarez.h"
+
+1726863264 source:c:\users\kevin\onedrive\escritorio\base de datos\tp_topicos_2024_2c_sabados_imagen\imagen_tp_2c\funciones_alvarez.c
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	<stdbool.h>
+	"funciones_alvarez.h"
+
+1726858637 c:\users\kevin\onedrive\escritorio\base de datos\tp_topicos_2024_2c_sabados_imagen\imagen_tp_2c\funciones_alvarez.h
+	<stdbool.h>
+
+1726846804 c:\users\kevin\onedrive\escritorio\base de datos\tp_topicos_2024_2c_sabados_imagen\imagen_tp_2c\estructuras.h
+
+1726863404 source:c:\users\kevin\onedrive\escritorio\base de datos\tp_topicos_2024_2c_sabados_imagen\imagen_tp_2c\funciones_grupo.c
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+	"funciones_alvarez.h"
+	"funciones_sarabia.h"
+	"funciones_varrenti.h"
+
+1726629228 source:c:\users\kevin\onedrive\escritorio\base de datos\tp_topicos_2024_2c_sabados_imagen\imagen_tp_2c\main.c
+	<stdio.h>
+	"funciones_grupo.h"
+
+1726712486 c:\users\kevin\onedrive\escritorio\base de datos\tp_topicos_2024_2c_sabados_imagen\imagen_tp_2c\funciones_grupo.h
+	"funciones_rufino.h"
+	<string.h>
+	<stdio.h>
+	"funciones_alvarez.h"
+
+1726863019 c:\users\kevin\onedrive\escritorio\base de datos\tp_topicos_2024_2c_sabados_imagen\imagen_tp_2c\funciones_sarabia.h
+	"funciones_alvarez.h"
+
+1726863807 c:\users\kevin\onedrive\escritorio\base de datos\tp_topicos_2024_2c_sabados_imagen\imagen_tp_2c\funciones_varrenti.h
+	"funciones_alvarez.h"
+
+1726863553 source:c:\users\kevin\onedrive\escritorio\base de datos\tp_topicos_2024_2c_sabados_imagen\imagen_tp_2c\funciones_sarabia.c
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	<stdbool.h>
+	"funciones_sarabia.h"
+
+1726860828 source:c:\users\kevin\onedrive\escritorio\base de datos\tp_topicos_2024_2c_sabados_imagen\imagen_tp_2c\funciones_varrenti.c
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	<stdbool.h>
+	"funciones_varrenti.h"
+
