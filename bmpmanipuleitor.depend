@@ -107,3 +107,101 @@
 	<stdbool.h>
 	"funciones_varrenti.h"
 
+1726947451 source:c:\users\pmvar\downloads\tp_topicos_2024_2c_sabados_imagen\tp_topicos_2024_2c_sabados_imagen\funciones_alvarez.c
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	<stdbool.h>
+	"funciones_alvarez.h"
+	"funciones_varrenti.h"
+
+1726940096 c:\users\pmvar\downloads\tp_topicos_2024_2c_sabados_imagen\tp_topicos_2024_2c_sabados_imagen\funciones_alvarez.h
+	<stdbool.h>
+
+1726947376 source:c:\users\pmvar\downloads\tp_topicos_2024_2c_sabados_imagen\tp_topicos_2024_2c_sabados_imagen\funciones_grupo.c
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+	"funciones_alvarez.h"
+	"funciones_sarabia.h"
+	"funciones_varrenti.h"
+
+1726940096 c:\users\pmvar\downloads\tp_topicos_2024_2c_sabados_imagen\tp_topicos_2024_2c_sabados_imagen\funciones_sarabia.h
+	"funciones_alvarez.h"
+
+1726944920 c:\users\pmvar\downloads\tp_topicos_2024_2c_sabados_imagen\tp_topicos_2024_2c_sabados_imagen\funciones_varrenti.h
+	"funciones_alvarez.h"
+
+1726940096 source:c:\users\pmvar\downloads\tp_topicos_2024_2c_sabados_imagen\tp_topicos_2024_2c_sabados_imagen\funciones_sarabia.c
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	<stdbool.h>
+	"funciones_sarabia.h"
+
+1726944920 source:c:\users\pmvar\downloads\tp_topicos_2024_2c_sabados_imagen\tp_topicos_2024_2c_sabados_imagen\funciones_varrenti.c
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	<stdbool.h>
+	"funciones_varrenti.h"
+
+1726940096 source:c:\users\pmvar\downloads\tp_topicos_2024_2c_sabados_imagen\tp_topicos_2024_2c_sabados_imagen\main.c
+	<stdio.h>
+	"funciones_grupo.h"
+
+1726940096 c:\users\pmvar\downloads\tp_topicos_2024_2c_sabados_imagen\tp_topicos_2024_2c_sabados_imagen\funciones_grupo.h
+	"funciones_rufino.h"
+	<string.h>
+	<stdio.h>
+	"funciones_alvarez.h"
+
+1727135671 source:c:\users\kevin\downloads\tp_topicos_2024_2c_sabados_imagen\tp_topicos_2024_2c_sabados_imagen\funciones_alvarez.c
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	<stdbool.h>
+	"funciones_alvarez.h"
+
+1727135452 c:\users\kevin\downloads\tp_topicos_2024_2c_sabados_imagen\tp_topicos_2024_2c_sabados_imagen\funciones_alvarez.h
+	"funciones_grupo.h"
+
+1727146455 c:\users\kevin\downloads\tp_topicos_2024_2c_sabados_imagen\tp_topicos_2024_2c_sabados_imagen\funciones_grupo.h
+	<stdbool.h>
+	<string.h>
+	<stdio.h>
+
+1727157408 source:c:\users\kevin\downloads\tp_topicos_2024_2c_sabados_imagen\tp_topicos_2024_2c_sabados_imagen\funciones_grupo.c
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	"funciones_grupo.h"
+	"funciones_alvarez.h"
+	"funciones_sarabia.h"
+	"funciones_varrenti.h"
+
+1727157737 c:\users\kevin\downloads\tp_topicos_2024_2c_sabados_imagen\tp_topicos_2024_2c_sabados_imagen\funciones_sarabia.h
+	"funciones_grupo.h"
+
+1727157676 c:\users\kevin\downloads\tp_topicos_2024_2c_sabados_imagen\tp_topicos_2024_2c_sabados_imagen\funciones_varrenti.h
+	"funciones_grupo.h"
+
+1727157676 source:c:\users\kevin\downloads\tp_topicos_2024_2c_sabados_imagen\tp_topicos_2024_2c_sabados_imagen\funciones_sarabia.c
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	<stdbool.h>
+	"funciones_sarabia.h"
+
+1727157676 source:c:\users\kevin\downloads\tp_topicos_2024_2c_sabados_imagen\tp_topicos_2024_2c_sabados_imagen\funciones_varrenti.c
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	<stdbool.h>
+	"funciones_varrenti.h"
+
+1726940096 source:c:\users\kevin\downloads\tp_topicos_2024_2c_sabados_imagen\tp_topicos_2024_2c_sabados_imagen\main.c
+	<stdio.h>
+	"funciones_grupo.h"
+

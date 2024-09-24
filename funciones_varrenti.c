@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include "funciones_varrenti.h"
 
+
 void aumentar_verde(t_pixel** imagen, int ancho, int alto,int nivel)
 {
 
@@ -33,37 +34,57 @@ void espejar_horizontal(t_pixel** imagen, int ancho, int alto)
     }
 }
 
-void recortar_30(t_pixel** imagen, int ancho, int alto)
+void recortar_30(t_pixel*** imagen, int* ancho, int* alto, t_metadata* metadata)
 {
-    int nuevo_ancho = ancho * 0.3;
-    int nuevo_alto = alto * 0.3;
+    int nuevo_ancho = (*ancho) * 0.7;
+    int nuevo_alto = (*alto) * 0.7;
 
     t_pixel** nueva_imagen = (t_pixel**)malloc(nuevo_alto * sizeof(t_pixel*));
+    if (nueva_imagen == NULL)
+    {
+        perror("Error al asignar memoria para nueva_imagen");
+        exit(EXIT_FAILURE);
+    }
     for (int i = 0; i < nuevo_alto; i++)
     {
         nueva_imagen[i] = (t_pixel*)malloc(nuevo_ancho * sizeof(t_pixel));
+        if (nueva_imagen[i] == NULL)
+        {
+            perror("Error al asignar memoria para nueva_imagen[i]");
+            exit(EXIT_FAILURE);
+        }
     }
 
     for (int i = 0; i < nuevo_alto; i++)
     {
         for (int j = 0; j < nuevo_ancho; j++)
         {
-            nueva_imagen[i][j] = imagen[i][j];
+            nueva_imagen[i][j] = (*imagen)[i][j];
         }
     }
 
-    // Libero la memoria de la imagen original si ya no se necesita
-    for (int i = 0; i < alto; i++)
+    for (int i = 0; i < *alto; i++)
     {
-        free(imagen[i]);
+        free((*imagen)[i]);
     }
-    free(imagen);
+    free(*imagen);
 
     // Asigno la nueva imagen a la imagen original
-    imagen = nueva_imagen;
+    *imagen = nueva_imagen;
+    *ancho = nuevo_ancho;
+    *alto = nuevo_alto;
+
+
+    // Actualizo las dimensiones
+
+    metadata->ancho = nuevo_ancho;
+    metadata->alto = nuevo_alto;
+    metadata->tamImagen = nuevo_ancho * nuevo_alto * (metadata->profundidad / 8); //8 bits para cada uno de los colores rojo, verde y azul
+    metadata->tamArchivo = metadata->offset + metadata->tamImagen;
 }
 
-void achicar_10(t_pixel*** imagen, int* ancho, int* alto)
+
+void achicar_10(t_pixel*** imagen, int* ancho, int* alto,t_metadata* metadata)
 {
     int nuevo_ancho = *ancho * 0.9;
     int nuevo_alto = *alto * 0.9;
@@ -107,23 +128,23 @@ void achicar_10(t_pixel*** imagen, int* ancho, int* alto)
     // Actualizo las dimensiones
     *ancho = nuevo_ancho;
     *alto = nuevo_alto;
+
+    metadata->ancho = nuevo_ancho;
+    metadata->alto = nuevo_alto;
+    metadata->tamImagen = nuevo_ancho * nuevo_alto * (metadata->profundidad / 8);
+    metadata->tamArchivo = metadata->offset + metadata->tamImagen;
 }
-
-void concatenar_vertical(t_pixel*** imagen1, int ancho1, int alto1, t_pixel*** imagen2, int ancho2, int alto2, t_pixel color)
+void comodin_aplicar_desenfoque(t_pixel*** imagen, int ancho, int alto)
 {
-    int nuevo_ancho = ancho1 + ancho2;
-    int nuevo_alto = (alto1 > alto2) ? alto1 : alto2;
-
-    // Crear la nueva imagen con el tamaño combinado
-    t_pixel** nueva_imagen = (t_pixel**)malloc(nuevo_alto * sizeof(t_pixel*));
+    t_pixel** nueva_imagen = (t_pixel**)malloc(alto * sizeof(t_pixel*));
     if (nueva_imagen == NULL)
     {
         perror("Error al asignar memoria para nueva_imagen");
         exit(EXIT_FAILURE);
     }
-    for (int i = 0; i < nuevo_alto; i++)
+    for (int i = 0; i < alto; i++)
     {
-        nueva_imagen[i] = (t_pixel*)malloc(nuevo_ancho * sizeof(t_pixel));
+        nueva_imagen[i] = (t_pixel*)malloc(ancho * sizeof(t_pixel));
         if (nueva_imagen[i] == NULL)
         {
             perror("Error al asignar memoria para nueva_imagen[i]");
@@ -131,61 +152,30 @@ void concatenar_vertical(t_pixel*** imagen1, int ancho1, int alto1, t_pixel*** i
         }
     }
 
-    // Copiar los píxeles de la primera imagen
-    for (int i = 0; i < alto1; i++)
+    // Aplicamos el filtro de desenfoque
+    for (int i = 1; i < alto - 1; i++)
     {
-        for (int j = 0; j < ancho1; j++)
+        for (int j = 1; j < ancho - 1; j++)
         {
-            nueva_imagen[i][j] = (*imagen1)[i][j];
-        }
-    }
-
-    // Rellenar el resto de la primera imagen si es más pequeña
-    if (alto1 < nuevo_alto)
-    {
-        for (int i = alto1; i < nuevo_alto; i++)
-        {
-            for (int j = 0; j < ancho1; j++)
+            for (int k = 0; k < 3; k++)
             {
-                nueva_imagen[i][j] = color;
+                nueva_imagen[i][j].pixel[k] = (
+                                                  (*imagen)[i-1][j-1].pixel[k] + (*imagen)[i-1][j].pixel[k] + (*imagen)[i-1][j+1].pixel[k] +
+                                                  (*imagen)[i][j-1].pixel[k] + (*imagen)[i][j].pixel[k] + (*imagen)[i][j+1].pixel[k] +
+                                                  (*imagen)[i+1][j-1].pixel[k] + (*imagen)[i+1][j].pixel[k] + (*imagen)[i+1][j+1].pixel[k]
+                                              ) / 9;
             }
         }
     }
 
-    // Copiar los píxeles de la segunda imagen
-    for (int i = 0; i < alto2; i++)
+    // Liberamos la memoria de la imagen original
+    for (int i = 0; i < alto; i++)
     {
-        for (int j = 0; j < ancho2; j++)
-        {
-            nueva_imagen[i][j + ancho1] = (*imagen2)[i][j];
-        }
+        free((*imagen)[i]);
     }
+    free(*imagen);
 
-    // Rellenar el resto de la segunda imagen si es más pequeña
-    if (alto2 < nuevo_alto)
-    {
-        for (int i = alto2; i < nuevo_alto; i++)
-        {
-            for (int j = 0; j < ancho2; j++)
-            {
-                nueva_imagen[i][j + ancho1] = color;
-            }
-        }
-    }
-
-    // Liberar la memoria de las imágenes originales
-    for (int i = 0; i < alto1; i++)
-    {
-        free((*imagen1)[i]);
-    }
-    free(*imagen1);
-
-    for (int i = 0; i < alto2; i++)
-    {
-        free((*imagen2)[i]);
-    }
-    free(*imagen2);
-
-    // Asignar la nueva imagen a la imagen original
-    *imagen1 = nueva_imagen;
+    // Asignamos la nueva imagen a la imagen original
+    *imagen = nueva_imagen;
 }
+
