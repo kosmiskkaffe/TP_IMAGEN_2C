@@ -35,7 +35,7 @@ void rotar_derecha(t_pixel*** imagen, int* ancho, int* alto, t_metadata* metadat
     int nuevo_ancho = *alto;
     int nuevo_alto = *ancho;
 
-    // Crear una nueva imagen con dimensiones intercambiadas
+    // Creo una nueva imagen con dimensiones intercambiadas
     t_pixel** nueva_imagen = (t_pixel**)malloc(nuevo_alto * sizeof(t_pixel*));
     if (nueva_imagen == NULL)
     {
@@ -57,7 +57,7 @@ void rotar_derecha(t_pixel*** imagen, int* ancho, int* alto, t_metadata* metadat
         }
     }
 
-    // Rotar la imagen 90 grados en sentido horario
+    // Roto la imagen 90 grados en sentido horario
     for (int i = 0; i < nuevo_alto; i++)
     {
         for (int j = 0; j < nuevo_ancho; j++)
@@ -66,26 +66,27 @@ void rotar_derecha(t_pixel*** imagen, int* ancho, int* alto, t_metadata* metadat
         }
     }
 
-    // Liberar la memoria de la imagen original
+    // Libero la memoria de la imagen original
     for (int i = 0; i < *alto; i++)
     {
         free((*imagen)[i]);
     }
     free(*imagen);
 
-    // Asignar la nueva imagen a la imagen original
+    // Asigno la nueva imagen a la imagen original
     *imagen = nueva_imagen;
 
-    // Actualizar las dimensiones
+    // Actualizo las dimensiones
     *ancho = nuevo_ancho;
     *alto = nuevo_alto;
 
-    // Actualizar la metadata
+    // Actualizo la metadata
     metadata->ancho = nuevo_ancho;
     metadata->alto = nuevo_alto;
     metadata->tamImagen = nuevo_ancho * nuevo_alto * (metadata->profundidad / 8);
     metadata->tamArchivo = metadata->offset + metadata->tamImagen;
 }
+
 void rotar_izquierda(t_pixel*** imagen, int* ancho, int* alto, t_metadata* metadata)
 {
     int nuevo_ancho = (*alto);
@@ -114,6 +115,7 @@ void rotar_izquierda(t_pixel*** imagen, int* ancho, int* alto, t_metadata* metad
         }
     }
 
+    //printf("Antes nueva_imagen: %d\n", nueva_imagen);
     // Rotamos la imagen
     for (int i = 0; i < nuevo_alto; i++)
     {
@@ -123,6 +125,8 @@ void rotar_izquierda(t_pixel*** imagen, int* ancho, int* alto, t_metadata* metad
         }
     }
 
+    //printf("Después nueva_imagen: %d\n", nueva_imagen);
+
     // Libero la memoria de la imagen original
     for (int i = 0; i < *alto; i++)
     {
@@ -130,14 +134,18 @@ void rotar_izquierda(t_pixel*** imagen, int* ancho, int* alto, t_metadata* metad
     }
     free(*imagen);
 
+    //printf("Antes Imagen imagen: %d\n", *imagen);
+
     // Actualizo los punteros y dimensiones
     *imagen = nueva_imagen;
     *ancho = nuevo_ancho;
     *alto = nuevo_alto;
 
+    //printf("Después Imagen imagen: %d\n", *imagen);
+
     // Actualizo la metadata
     metadata->ancho = nuevo_ancho;
     metadata->alto = nuevo_alto;
-    metadata->tamImagen = nuevo_ancho * nuevo_alto * (metadata->profundidad / 8);
-    metadata->tamArchivo = metadata->offset + metadata->tamImagen;
+
+    //printf("Fin");
 }

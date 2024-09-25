@@ -171,7 +171,7 @@
 	<string.h>
 	<stdio.h>
 
-1727157408 source:c:\users\kevin\downloads\tp_topicos_2024_2c_sabados_imagen\tp_topicos_2024_2c_sabados_imagen\funciones_grupo.c
+1727199395 source:c:\users\kevin\downloads\tp_topicos_2024_2c_sabados_imagen\tp_topicos_2024_2c_sabados_imagen\funciones_grupo.c
 	<string.h>
 	<stdio.h>
 	<stdlib.h>
@@ -187,14 +187,14 @@
 1727157676 c:\users\kevin\downloads\tp_topicos_2024_2c_sabados_imagen\tp_topicos_2024_2c_sabados_imagen\funciones_varrenti.h
 	"funciones_grupo.h"
 
-1727157676 source:c:\users\kevin\downloads\tp_topicos_2024_2c_sabados_imagen\tp_topicos_2024_2c_sabados_imagen\funciones_sarabia.c
+1727199395 source:c:\users\kevin\downloads\tp_topicos_2024_2c_sabados_imagen\tp_topicos_2024_2c_sabados_imagen\funciones_sarabia.c
 	<stdio.h>
 	<string.h>
 	<stdlib.h>
 	<stdbool.h>
 	"funciones_sarabia.h"
 
-1727157676 source:c:\users\kevin\downloads\tp_topicos_2024_2c_sabados_imagen\tp_topicos_2024_2c_sabados_imagen\funciones_varrenti.c
+1727197341 source:c:\users\kevin\downloads\tp_topicos_2024_2c_sabados_imagen\tp_topicos_2024_2c_sabados_imagen\funciones_varrenti.c
 	<stdio.h>
 	<string.h>
 	<stdlib.h>

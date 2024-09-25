@@ -34,60 +34,50 @@ void espejar_horizontal(t_pixel** imagen, int ancho, int alto)
     }
 }
 
-void recortar_30(t_pixel*** imagen, int* ancho, int* alto, t_metadata* metadata)
+
+
+void recortar_30(t_pixel*** imagen, int* ancho, int* alto, t_metadata* metadata,int nivel)
 {
-    int nuevo_ancho = (*ancho) * 0.7;
-    int nuevo_alto = (*alto) * 0.7;
+    // Si recortamos la imagen en un 30%, quiere decir que nos quedamos con un 70% de la imagen?
+    int nuevo_ancho = *ancho * (100 - nivel)/100;
+    int nuevo_alto = *alto * (100 - nivel)/100;
+
+    // Centro la imagen en 0,0
+
+    int offset_x = (*ancho - nuevo_ancho) / 2;
+    int offset_y = (*alto - nuevo_alto) / 2;
 
     t_pixel** nueva_imagen = (t_pixel**)malloc(nuevo_alto * sizeof(t_pixel*));
-    if (nueva_imagen == NULL)
-    {
-        perror("Error al asignar memoria para nueva_imagen");
-        exit(EXIT_FAILURE);
-    }
     for (int i = 0; i < nuevo_alto; i++)
     {
         nueva_imagen[i] = (t_pixel*)malloc(nuevo_ancho * sizeof(t_pixel));
-        if (nueva_imagen[i] == NULL)
-        {
-            perror("Error al asignar memoria para nueva_imagen[i]");
-            exit(EXIT_FAILURE);
-        }
-    }
-
-    for (int i = 0; i < nuevo_alto; i++)
-    {
         for (int j = 0; j < nuevo_ancho; j++)
         {
-            nueva_imagen[i][j] = (*imagen)[i][j];
+            nueva_imagen[i][j] = (*imagen)[i + offset_y][j + offset_x];
         }
     }
 
+    // Libero la memoria de la imagen original
     for (int i = 0; i < *alto; i++)
     {
         free((*imagen)[i]);
     }
     free(*imagen);
 
-    // Asigno la nueva imagen a la imagen original
+    // Actualizo los punteros y dimensiones
     *imagen = nueva_imagen;
     *ancho = nuevo_ancho;
     *alto = nuevo_alto;
 
-
-    // Actualizo las dimensiones
-
     metadata->ancho = nuevo_ancho;
     metadata->alto = nuevo_alto;
-    metadata->tamImagen = nuevo_ancho * nuevo_alto * (metadata->profundidad / 8); //8 bits para cada uno de los colores rojo, verde y azul
-    metadata->tamArchivo = metadata->offset + metadata->tamImagen;
 }
 
-
-void achicar_10(t_pixel*** imagen, int* ancho, int* alto,t_metadata* metadata)
+void achicar_10(t_pixel*** imagen, int* ancho, int* alto,t_metadata* metadata,int nivel)
 {
-    int nuevo_ancho = *ancho * 0.9;
-    int nuevo_alto = *alto * 0.9;
+    // Si vos lo achicas en un 10%, quiere decir que la imagen debería mostrarse en un 90%
+    int nuevo_ancho = *ancho * (100 - nivel)/100;
+    int nuevo_alto = *alto * (100 - nivel)/100;
 
     // Creo una nueva imagen con el tamaño reducido
     t_pixel** nueva_imagen = (t_pixel**)malloc(nuevo_alto * sizeof(t_pixel*));
@@ -131,9 +121,8 @@ void achicar_10(t_pixel*** imagen, int* ancho, int* alto,t_metadata* metadata)
 
     metadata->ancho = nuevo_ancho;
     metadata->alto = nuevo_alto;
-    metadata->tamImagen = nuevo_ancho * nuevo_alto * (metadata->profundidad / 8);
-    metadata->tamArchivo = metadata->offset + metadata->tamImagen;
 }
+
 void comodin_aplicar_desenfoque(t_pixel*** imagen, int ancho, int alto)
 {
     t_pixel** nueva_imagen = (t_pixel**)malloc(alto * sizeof(t_pixel*));

@@ -160,34 +160,34 @@ int solucion(int argc, char* argv[])
         {
             escala_de_grises(imagen_copia, ancho, alto);
         }
-        else if (strncmp(opciones_validas[i], "--aumentar-contraste=10", 20) == 0)
+        else if (strncmp(opciones_validas[i], "--aumentar-contraste=", 20) == 0)
         {
             int nivel = atoi(opciones_validas[i] + 21);
             //printf("nivel: Valor %d\n", nivel); //Mensaje depurador - Compruebo que le estoy pasando 10 como nivel
             aumentar_contraste(imagen_copia, ancho, alto, nivel);
         }
-        else if (strncmp(opciones_validas[i], "--reducir-contraste=20", 19) == 0)
+        else if (strncmp(opciones_validas[i], "--reducir-contraste=", 19) == 0)
         {
             int nivel = atoi(opciones_validas[i] + 20);
             //printf("nivel: Valor %d\n", nivel); //Mensaje depurador - Compruebo que le estoy pasando 20 como nivel
             reducir_contraste(imagen_copia, ancho, alto, nivel);
         }
-        else if (strncmp(opciones_validas[i], "--tonalidad-azul=50", 16) == 0)
+        else if (strncmp(opciones_validas[i], "--tonalidad-azul=", 16) == 0)
         {
             int nivel = atoi(opciones_validas[i] + 17);
             //printf("nivel: Valor %d\n", nivel); //Mensaje depurador - Compruebo que le estoy pasando 50 como nivel
             aumentar_azul(imagen_copia, ancho, alto, nivel);
         }
-        else if (strncmp(opciones_validas[i], "--tonalidad-roja=15", 16) == 0)
+        else if (strncmp(opciones_validas[i], "--tonalidad-roja=", 16) == 0)
         {
             int nivel = atoi(opciones_validas[i] + 17);
             //printf("nivel: Valor %d\n", nivel); //Mensaje depurador - Compruebo que le estoy pasando 15 como nivel
             aumentar_rojo(imagen_copia, ancho, alto, nivel);
         }
-        else if (strncmp(opciones_validas[i], "--tonalidad-verde=5", 17) == 0)
+        else if (strncmp(opciones_validas[i], "--tonalidad-verde=", 17) == 0)
         {
             int nivel = atoi(opciones_validas[i] + 18);
-            printf("nivel: Valor %d\n", nivel); //Mensaje depurador - Compruebo que le estoy pasando 5 como nivel
+            //printf("nivel: Valor %d\n", nivel); //Mensaje depurador - Compruebo que le estoy pasando 5 como nivel
             aumentar_verde(imagen_copia, ancho, alto, nivel);
         }
         else if (strcmp(opciones_validas[i], "--espejar-horizontal") == 0)
@@ -198,21 +198,26 @@ int solucion(int argc, char* argv[])
         {
             espejar_vertical(imagen_copia, ancho, alto);
         }
-        else if (strcmp(opciones_validas[i], "--recortar=30") == 0)
+        else if (strncmp(opciones_validas[i], "--recortar=",10) == 0)
         {
-            recortar_30(&imagen_copia, &ancho, &alto,&metadata);
+            int nivel = atoi(opciones_validas[i] + 11);
+            //printf("nivel: Valor %d\n", nivel); //Mensaje depurador
+            recortar_30(&imagen_copia, &ancho, &alto,&metadata,nivel);
         }
         else if (strcmp(opciones_validas[i], "--rotar-derecha") == 0)
         {
             rotar_derecha(&imagen_copia, &ancho, &alto,&metadata);
+
         }
         else if (strcmp(opciones_validas[i], "--rotar-izquierda") == 0)
         {
             rotar_izquierda(&imagen_copia, &ancho, &alto,&metadata);
         }
-        else if (strcmp(opciones_validas[i], "--achicar=10") == 0)
+        else if (strncmp(opciones_validas[i], "--achicar=",9) == 0)
         {
-            achicar_10(&imagen_copia, &ancho, &alto,&metadata);
+            int nivel = atoi(opciones_validas[i] + 10);
+            //printf("nivel: Valor %d\n", nivel); //Mensaje depurador
+            achicar_10(&imagen_copia, &ancho, &alto,&metadata,nivel);
         }
         else if (strcmp(opciones_validas[i], "--comodin") == 0)
         {
@@ -221,7 +226,9 @@ int solucion(int argc, char* argv[])
 
         char archivo_salida[256];
         // Almaceno la cadena formateada en el búfer archivo_salida
-        snprintf(archivo_salida, sizeof(archivo_salida), "IMAGEN_%s_%s", opciones_validas[i] + 2, archivo_entrada);
+        snprintf(archivo_salida, sizeof(archivo_salida), "IMAGEN_%s_%s", reemplazar_caracteres(opciones_validas[i] + 2), archivo_entrada);
+
+        //printf("obtener_nombre_opcion(opciones_validas[i] + 2): %s\n", reemplazar_caracteres(opciones_validas[i] + 2));
 
         archivo = fopen(archivo_salida, "wb");
         if (archivo == NULL)
@@ -238,6 +245,8 @@ int solucion(int argc, char* argv[])
         // Guardo la imagen con los cambios especificados
         guardar_imagen(archivo, imagen_copia, ancho, alto, metadata);
 
+        //printf("Mensaje depurador test\n");
+
         fclose(archivo);
 
         for (int j = 0; j < alto; j++)
@@ -247,11 +256,15 @@ int solucion(int argc, char* argv[])
         free(imagen_copia);
     }
 
+    // Liberación de memoria de la matriz imagen
+
     for (int j = 0; j < alto; j++)
     {
         free(imagen[j]);
     }
     free(imagen);
+
+    //printf("Mensaje depurador test5\n");
 
     return 0;
 }
@@ -266,10 +279,29 @@ void mover_cursor(FILE* archivo, int cant_posicion)
 
 bool es_opcion_valida(const char* opcion)
 {
-    return strcmp(opcion, "--negativo") == 0 || strcmp(opcion, "--escala-de-grises") == 0 || strcmp(opcion, "--aumentar-contraste=10") == 0 || strcmp(opcion, "--reducir-contraste=20") == 0 || strcmp(opcion, "--tonalidad-azul=50") == 0
-           || strcmp(opcion, "--tonalidad-verde=5") == 0 || strcmp(opcion, "--tonalidad-roja=15") == 0 || strcmp(opcion, "--espejar-horizontal") == 0 || strcmp(opcion, "--espejar-vertical") == 0 || strcmp(opcion, "--recortar=30") == 0
-           || strcmp(opcion, "--rotar-derecha") == 0 || strcmp(opcion, "--rotar-izquierda") == 0 || strcmp(opcion, "--achicar=10") == 0 || strcmp(opcion, "--concatenar-horizontal") == 0 || strcmp(opcion, "--concatenar-vertical") == 0
-           || strcmp(opcion, "--comodin") == 0;
+    //printf("opcion: %s\n", opcion);
+    // Verificamos si la opción contiene '='
+    const char *pos = strchr(opcion, '=');
+    if (pos != NULL)
+    {
+        // Creamos una copia de la opción hasta el '='
+        size_t length = pos - opcion;
+        char resultado[length + 1];
+        strncpy(resultado, opcion, length);
+        resultado[length] = '\0';  // Queremos que el carácter nulo al final
+
+        // Mensaje depurador para ver que hay en la variable resultado xd
+        //printf("Resultado: %s\n", resultado);
+        return  strcmp(resultado, "--aumentar-contraste") == 0 || strcmp(resultado, "--reducir-contraste") == 0 || strcmp(resultado, "--tonalidad-azul") == 0
+                || strcmp(resultado, "--tonalidad-verde") == 0 || strcmp(resultado, "--tonalidad-roja") == 0 ||  strcmp(resultado, "--recortar") == 0
+                || strcmp(resultado, "--achicar") == 0;
+    }
+    else
+    {
+        return strcmp(opcion, "--negativo") == 0 || strcmp(opcion, "--escala-de-grises") == 0 || strcmp(opcion, "--espejar-horizontal") == 0 || strcmp(opcion, "--espejar-vertical") == 0 || strcmp(opcion, "--rotar-derecha") == 0 || strcmp(opcion, "--rotar-izquierda") == 0
+               || strcmp(opcion, "--concatenar-horizontal") == 0 || strcmp(opcion, "--concatenar-vertical") == 0
+               || strcmp(opcion, "--comodin") == 0;
+    }
 }
 
 bool es_duplicado(char* archivo, char** archivos_procesados, int count)
@@ -284,21 +316,16 @@ bool es_duplicado(char* archivo, char** archivos_procesados, int count)
     return false;
 }
 
-const char* obtener_nombre_opcion(const char* opcion)
+char *reemplazar_caracteres(char *cadena)
 {
-    if (strcmp(opcion, "--negativo") == 0)
+    for (int i = 0; cadena[i] != '\0'; i++)
     {
-        return "negativo";
+        if (cadena[i] == '-' || cadena[i] == '=')
+        {
+            cadena[i] = '_';
+        }
     }
-    else if (strcmp(opcion, "--escala-de-grises") == 0)
-    {
-        return "escala_de_grises";
-    }
-    else if (strcmp(opcion, "--aumentar-contraste=10") == 0)
-    {
-        return "aumentar_contraste_10";
-    }
-    return "";
+    return cadena;
 }
 
 t_metadata obtener_metadata(FILE* archivo)
@@ -445,6 +472,8 @@ void guardar_imagen(FILE* archivo, t_pixel** imagen, int ancho, int alto, t_meta
         // Escribir los bytes de relleno
         fwrite(paddingBytes, sizeof(unsigned char), padding, archivo);
     }
+
+    //printf("Mensaje depurador test2\n");
 }
 
 int calcRelleno(unsigned int ancho)
