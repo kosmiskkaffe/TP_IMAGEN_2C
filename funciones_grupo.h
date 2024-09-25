@@ -37,6 +37,7 @@ void mover_cursor(FILE* archivo, int cant_posicion); //  OK - Para posicionarme 
 void guardar_imagen(FILE* archivo,t_pixel** imagen, int ancho, int alto, t_metadata metadata); //Guardar copia de la Imagen
 int calcRelleno(unsigned int); // Calcular padding
 bool es_opcion_valida(const char* opcion); // Opciones válidas
+bool validar_nivel(int nivel); //Valida el rango del nivel pasado por parametros (entre 0 y 100)
 char *reemplazar_caracteres(char *cadena); // Reeplazar los caracteres '=' y '-' por '_' en el nombre del archivo de salida
 bool es_duplicado(char* archivo, char** archivos_procesados, int count); //Controlar que no ejecute dos veces una misma opcion en el argumento
 

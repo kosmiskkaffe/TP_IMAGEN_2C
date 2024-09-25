@@ -163,32 +163,83 @@ int solucion(int argc, char* argv[])
         else if (strncmp(opciones_validas[i], "--aumentar-contraste=", 20) == 0)
         {
             int nivel = atoi(opciones_validas[i] + 21);
-            //printf("nivel: Valor %d\n", nivel); //Mensaje depurador - Compruebo que le estoy pasando 10 como nivel
-            aumentar_contraste(imagen_copia, ancho, alto, nivel);
+
+            if (validar_nivel(nivel))
+            {
+                //printf("El número %d está entre 0 y 100.\n", nivel);
+                //printf("nivel aumentar contraste: Valor %d\n", nivel); //Mensaje depurador
+                aumentar_contraste(imagen_copia, ancho, alto, nivel);
+            }
+            else
+            {
+                printf("El nivel de aumento de contraste %d no está entre 0 y 100.\n", nivel);
+            }
+
         }
         else if (strncmp(opciones_validas[i], "--reducir-contraste=", 19) == 0)
         {
             int nivel = atoi(opciones_validas[i] + 20);
-            //printf("nivel: Valor %d\n", nivel); //Mensaje depurador - Compruebo que le estoy pasando 20 como nivel
-            reducir_contraste(imagen_copia, ancho, alto, nivel);
+
+            if (validar_nivel(nivel))
+            {
+                //printf("El número %d está entre 0 y 100.\n", nivel);
+                //printf("nivel reducir contrastte: Valor %d\n", nivel); //Mensaje depurador - Compruebo que le estoy pasando 20 como nivel
+                reducir_contraste(imagen_copia, ancho, alto, nivel);
+            }
+            else
+            {
+                printf("El nivel de reducción de contrate %d no está entre 0 y 100.\n", nivel);
+            }
+
         }
         else if (strncmp(opciones_validas[i], "--tonalidad-azul=", 16) == 0)
         {
             int nivel = atoi(opciones_validas[i] + 17);
-            //printf("nivel: Valor %d\n", nivel); //Mensaje depurador - Compruebo que le estoy pasando 50 como nivel
-            aumentar_azul(imagen_copia, ancho, alto, nivel);
+
+            if (validar_nivel(nivel))
+            {
+                //printf("El número %d está entre 0 y 100.\n", nivel);
+                //printf("nivel azul: Valor %d\n", nivel); //Mensaje depurador - Compruebo que le estoy pasando 50 como nivel
+                aumentar_azul(imagen_copia, ancho, alto, nivel);
+            }
+            else
+            {
+                printf("El nivel de la tonalidad azul %d no está entre 0 y 100.\n", nivel);
+            }
+
         }
         else if (strncmp(opciones_validas[i], "--tonalidad-roja=", 16) == 0)
         {
             int nivel = atoi(opciones_validas[i] + 17);
-            //printf("nivel: Valor %d\n", nivel); //Mensaje depurador - Compruebo que le estoy pasando 15 como nivel
-            aumentar_rojo(imagen_copia, ancho, alto, nivel);
+
+            if (validar_nivel(nivel))
+            {
+                //printf("El número %d está entre 0 y 100.\n", nivel);
+                //printf("nivel rojo: Valor %d\n", nivel); //Mensaje depurador - Compruebo que le estoy pasando 15 como nivel
+                aumentar_rojo(imagen_copia, ancho, alto, nivel);
+            }
+            else
+            {
+                printf("El nivel de tonalidad roja %d no está entre 0 y 100.\n", nivel);
+            }
+
         }
         else if (strncmp(opciones_validas[i], "--tonalidad-verde=", 17) == 0)
         {
             int nivel = atoi(opciones_validas[i] + 18);
-            //printf("nivel: Valor %d\n", nivel); //Mensaje depurador - Compruebo que le estoy pasando 5 como nivel
-            aumentar_verde(imagen_copia, ancho, alto, nivel);
+
+            if (validar_nivel(nivel))
+            {
+                //printf("El número %d está entre 0 y 100.\n", nivel);
+                //printf("nivel verde: Valor %d\n", nivel); //Mensaje depurador - Compruebo que le estoy pasando 5 como nivel
+                aumentar_verde(imagen_copia, ancho, alto, nivel);
+            }
+            else
+            {
+                printf("El nivel de tonalidad Verde %d no está entre 0 y 100.\n", nivel);
+            }
+
+
         }
         else if (strcmp(opciones_validas[i], "--espejar-horizontal") == 0)
         {
@@ -201,8 +252,18 @@ int solucion(int argc, char* argv[])
         else if (strncmp(opciones_validas[i], "--recortar=",10) == 0)
         {
             int nivel = atoi(opciones_validas[i] + 11);
-            //printf("nivel: Valor %d\n", nivel); //Mensaje depurador
-            recortar_30(&imagen_copia, &ancho, &alto,&metadata,nivel);
+
+            if (validar_nivel(nivel))
+            {
+                //printf("El número %d está entre 0 y 100.\n", nivel);
+                //printf("nivel recorte: Valor %d\n", nivel); //Mensaje depurador
+                recortar_30(&imagen_copia, &ancho, &alto,&metadata,nivel);
+            }
+            else
+            {
+                printf("El porcentaje de Recorte %d no está entre 0 y 100.\n", nivel);
+            }
+
         }
         else if (strcmp(opciones_validas[i], "--rotar-derecha") == 0)
         {
@@ -216,8 +277,17 @@ int solucion(int argc, char* argv[])
         else if (strncmp(opciones_validas[i], "--achicar=",9) == 0)
         {
             int nivel = atoi(opciones_validas[i] + 10);
-            //printf("nivel: Valor %d\n", nivel); //Mensaje depurador
-            achicar_10(&imagen_copia, &ancho, &alto,&metadata,nivel);
+
+            if (validar_nivel(nivel))
+            {
+                //printf("El número %d está entre 0 y 100.\n", nivel);
+                //printf("nivel % achicar: Valor %d\n", nivel); //Mensaje depurador
+                achicar_10(&imagen_copia, &ancho, &alto,&metadata,nivel);
+            }
+            else
+            {
+                printf("El número %d no está entre 0 y 100.\n", nivel);
+            }
         }
         else if (strcmp(opciones_validas[i], "--comodin") == 0)
         {
@@ -314,6 +384,11 @@ bool es_duplicado(char* archivo, char** archivos_procesados, int count)
         }
     }
     return false;
+}
+
+bool validar_nivel(int nivel)
+{
+    return (nivel >= 0 && nivel <= 100);
 }
 
 char *reemplazar_caracteres(char *cadena)

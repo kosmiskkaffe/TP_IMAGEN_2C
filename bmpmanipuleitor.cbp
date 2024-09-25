@@ -11,7 +11,7 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters="--comodin --negativo --escala-de-grises --espejar-horizontal --espejar-vertical --aumentar-contraste=10 --reducir-contraste=20 --tonalidad-azul=50 --tonalidad-verde=5 --tonalidad-roja=15 --recortar=30 --achicar=10 --rotar-derecha --rotar-izquierda --comodin car2048.bmp" />
+				<Option parameters="--comodin --negativo --escala-de-grises --espejar-horizontal --espejar-vertical --aumentar-contraste=10 --reducir-contraste=20 --tonalidad-azul=190 --tonalidad-verde=5 --tonalidad-roja=15 --recortar=30 --achicar=10 --rotar-derecha --rotar-izquierda --comodin car2048.bmp" />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>
