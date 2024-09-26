@@ -2,7 +2,7 @@
     Integrantes del grupo. En caso de ser un grupo de dos integrantes, no completar el último campo.
     Si alguno de los integrantes del grupo dejara la materia, completar de todos modos sus datos, aclarando que no entrega.
     -----------------
-    Apellido: Alvarez, Gisele
+    Apellido: Alvarez, Giselé
     DNI: 34579954
     Entrega: Sí
     -----------------
@@ -31,7 +31,7 @@ int solucion(int argc, char* argv[])
 {
     if (argc < 3)
     {
-        printf("Uso: bmpmanipuleitor <opcion1> <opcion2> ... <archivo> <archivo2>\n");
+        printf("Uso: bmpmanipuleitor <opcion1> <opcion2> ... <archivo> <archivo2>...\n");
         return 1;
     }
 
@@ -294,9 +294,25 @@ int solucion(int argc, char* argv[])
             comodin_aplicar_desenfoque(&imagen_copia, ancho, alto);
         }
 
-        char archivo_salida[256];
+
+        //Queremos obtener solo el nombre del archivo sin la ruta
+        char* nombre_archivo = strrchr(archivo_entrada, '/');
+        if (nombre_archivo == NULL)
+        {
+            nombre_archivo = strrchr(archivo_entrada, '\\');
+        }
+        if (nombre_archivo != NULL)
+        {
+            nombre_archivo++; // Avanzamos el puntero para omitir la barra
+        }
+        else
+        {
+            nombre_archivo = archivo_entrada; // No se encontró ninguna barra, usar el nombre completo
+        }
+
+        char archivo_salida[512];
         // Almaceno la cadena formateada en el búfer archivo_salida
-        snprintf(archivo_salida, sizeof(archivo_salida), "IMAGEN_%s_%s", reemplazar_caracteres(opciones_validas[i] + 2), archivo_entrada);
+        snprintf(archivo_salida, sizeof(archivo_salida), "%.*sIMAGEN_%s_%s", (int)(nombre_archivo - archivo_entrada), archivo_entrada, reemplazar_caracteres(opciones_validas[0] + 2), nombre_archivo);
 
         //printf("obtener_nombre_opcion(opciones_validas[i] + 2): %s\n", reemplazar_caracteres(opciones_validas[i] + 2));
 
@@ -346,6 +362,7 @@ void mover_cursor(FILE* archivo, int cant_posicion)
         fread(&aux, sizeof(unsigned char), 1, archivo);
     }
 }
+
 
 bool es_opcion_valida(const char* opcion)
 {

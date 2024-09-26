@@ -6,6 +6,8 @@ void aumentar_verde(t_pixel** imagen, int ancho, int alto,int nivel); //  Aument
 void espejar_horizontal(t_pixel** imagen, int ancho, int alto); // Invierte horizontalmente la imagen
 void recortar_30(t_pixel*** imagen, int* ancho, int* alto, t_metadata* metadata,int nivel); // Recorta el tamaño de la imagen al 30%, sin cambiar sus proporciones. Este recorta!
 void achicar_10(t_pixel*** imagen, int* ancho, int* alto,t_metadata* metadata,int nivel); // Reduce la imagen al 10%.
+//--concatenar-horizontal
+//--concatenar-vertical
 
 // Función propuesta por el grupo
 void comodin_aplicar_desenfoque(t_pixel*** imagen, int ancho, int alto); // Funciona OK. Comodin : Aplicamos un desenfoque a la Imagen

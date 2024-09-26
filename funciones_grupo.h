@@ -1,6 +1,24 @@
 #ifndef FUNCIONES_GRUPO_H_INCLUDED
 #define FUNCIONES_GRUPO_H_INCLUDED
 
+/*
+    Integrantes del grupo. En caso de ser un grupo de dos integrantes, no completar el último campo.
+    Si alguno de los integrantes del grupo dejara la materia, completar de todos modos sus datos, aclarando que no entrega.
+    -----------------
+    Apellido: Alvarez, Giselé
+    DNI: 34579954
+    Entrega: Sí
+    -----------------
+    Apellido: Sarabia, Patricio
+    DNI: 32335091
+    Entrega: Sí
+    -----------------
+    Apellido: Varrenti, Pablo Martin
+    DNI: 38056239
+    Entrega: Sí
+    -----------------
+*/
+
 #include <stdbool.h>
 #include <string.h>
 #include <stdio.h>
